@@ -50,6 +50,8 @@ textarea {
   display: flex;
   align-items: center;
   justify-content: space-between;
+  position: relative;
+  z-index: 10;
   gap: 16px;
   padding: 18px 24px;
   background: #0f172a;
@@ -57,8 +59,11 @@ textarea {
 }
 
 .brand {
+  display: inline-flex;
+  align-items: center;
   font-size: 20px;
   font-weight: 700;
+  cursor: pointer;
 }
 
 .nav {
