@@ -55,8 +55,13 @@ export async function ensureTables(): Promise<void> {
       created_at TIMESTAMPTZ NOT NULL DEFAULT NOW(),
       expires_at TIMESTAMPTZ,
       redeemed_at TIMESTAMPTZ,
-      redeemed_by VARCHAR(120)
+      redeemed_by TEXT
     );
+  `;
+
+  await sql`
+    ALTER TABLE card_keys
+    ALTER COLUMN redeemed_by TYPE TEXT;
   `;
 
   await sql`
