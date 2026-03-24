@@ -42,7 +42,6 @@ function getReasonText(result: RedeemResult | null): string {
 }
 
 export default function RedeemClient() {
-  const [orderId, setOrderId] = useState("");
   const [workosCursorSessionToken, setWorkosCursorSessionToken] = useState("");
   const [code, setCode] = useState("");
   const [submitting, setSubmitting] = useState(false);
@@ -63,7 +62,6 @@ export default function RedeemClient() {
         },
         body: JSON.stringify({
           code,
-          orderId: orderId.trim(),
           workosCursorSessionToken: workosCursorSessionToken.trim(),
         }),
       });
@@ -83,16 +81,6 @@ export default function RedeemClient() {
 
   return (
     <form className="stack-form redeem-form-adapted" onSubmit={handleSubmit}>
-      <label>
-        订单号
-        <input
-          className="input mono"
-          value={orderId}
-          onChange={(event) => setOrderId(event.target.value)}
-          placeholder="例如 ORDER-20260324-0001"
-        />
-      </label>
-
       <label>
         WorkosCursorSessionToken
         <textarea
@@ -125,8 +113,6 @@ export default function RedeemClient() {
           {"card" in result && result.card ? (
             <p className="muted">
               核销时间：{result.card.redeemedAt ? new Date(result.card.redeemedAt).toLocaleString("zh-CN") : "-"}
-              <br />
-              核销人：{result.card.redeemedBy ?? "-"}
             </p>
           ) : null}
         </div>
