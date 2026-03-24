@@ -63,14 +63,8 @@ export default function RedeemClient() {
         },
         body: JSON.stringify({
           code,
-          redeemer: [
-            orderId.trim() ? `订单号:${orderId.trim()}` : "",
-            workosCursorSessionToken.trim()
-              ? `WorkosCursorSessionToken:${workosCursorSessionToken.trim()}`
-              : "",
-          ]
-            .filter(Boolean)
-            .join(" | "),
+          orderId: orderId.trim(),
+          workosCursorSessionToken: workosCursorSessionToken.trim(),
         }),
       });
       const data = (await response.json()) as RedeemResult & { error?: string };

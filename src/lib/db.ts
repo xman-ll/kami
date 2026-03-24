@@ -144,7 +144,7 @@ export async function createCards(input: {
 
 export async function redeemCard(input: {
   code: string;
-  redeemer?: string;
+  workosCursorSessionToken?: string;
 }): Promise<
   | { success: true; card: CardRecord }
   | { success: false; reason: "not_found" | "already_redeemed" | "expired"; card?: CardRecord }
@@ -152,13 +152,13 @@ export async function redeemCard(input: {
   await ensureTables();
 
   const normalizedCode = normalizeCardCode(input.code);
-  const redeemer = input.redeemer?.trim() || null;
+  const workosCursorSessionToken = input.workosCursorSessionToken?.trim() || null;
   const updated = await sql<CardRow>`
     UPDATE card_keys
     SET
       status = 'redeemed',
       redeemed_at = NOW(),
-      redeemed_by = ${redeemer}
+      redeemed_by = ${workosCursorSessionToken}
     WHERE
       code = ${normalizedCode}
       AND status = 'unused'

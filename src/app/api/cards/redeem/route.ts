@@ -6,7 +6,7 @@ export async function POST(request: Request) {
   try {
     const body = (await request.json()) as {
       code?: string;
-      redeemer?: string;
+      workosCursorSessionToken?: string;
     };
 
     if (!body.code?.trim()) {
@@ -15,7 +15,7 @@ export async function POST(request: Request) {
 
     const result = await redeemCard({
       code: body.code,
-      redeemer: body.redeemer,
+      workosCursorSessionToken: body.workosCursorSessionToken,
     });
 
     return NextResponse.json(result, { status: result.success ? 200 : 409 });
