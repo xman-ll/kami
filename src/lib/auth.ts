@@ -79,6 +79,17 @@ export async function clearAdminSession(): Promise<void> {
   });
 }
 
+export async function hasAdminSession(): Promise<boolean> {
+  try {
+    const cookieStore = await cookies();
+    const token = cookieStore.get(SESSION_COOKIE_NAME)?.value;
+
+    return Boolean(token && verifySessionToken(token));
+  } catch {
+    return false;
+  }
+}
+
 export async function requireAdmin(): Promise<void> {
   const cookieStore = await cookies();
   const token = cookieStore.get(SESSION_COOKIE_NAME)?.value;

@@ -1,6 +1,10 @@
 import Link from "next/link";
 
-export default function HomePage() {
+import { hasAdminSession } from "@/lib/auth";
+
+export default async function HomePage() {
+  const isAdminLoggedIn = await hasAdminSession();
+
   return (
     <div className="hero-grid">
       <section className="panel">
@@ -10,9 +14,11 @@ export default function HomePage() {
           这是一个可直接部署到 Vercel 的卡密系统，包含后台批量生成、状态管理、CSV 导出和前台核销页面。
         </p>
         <div className="actions">
-          <Link href="/admin" className="button primary">
-            打开管理后台
-          </Link>
+          {isAdminLoggedIn ? (
+            <Link href="/admin" className="button primary">
+              打开管理后台
+            </Link>
+          ) : null}
           <Link href="/redeem" className="button">
             打开核销页面
           </Link>

@@ -1,6 +1,8 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 
+import { hasAdminSession } from "@/lib/auth";
+
 import "./globals.css";
 
 export const metadata: Metadata = {
@@ -8,11 +10,13 @@ export const metadata: Metadata = {
   description: "支持批量生成、在线核销和后台管理的卡密系统",
 };
 
-export default function RootLayout({
+export default async function RootLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+  const isAdminLoggedIn = await hasAdminSession();
+
   return (
     <html lang="zh-CN">
       <body>
@@ -22,7 +26,7 @@ export default function RootLayout({
               卡密系统
             </Link>
             <nav className="nav">
-              <Link href="/admin">后台管理</Link>
+              {isAdminLoggedIn ? <Link href="/admin">后台管理</Link> : null}
               <Link href="/redeem">核销页面</Link>
             </nav>
           </header>
