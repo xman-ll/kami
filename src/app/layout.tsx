@@ -1,7 +1,6 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 
-import BrandLink from "@/components/brand-link";
 import { hasAdminSession } from "@/lib/auth";
 
 import "./globals.css";
@@ -23,7 +22,7 @@ export default async function RootLayout({
       <body>
         <div className="shell">
           <header className="topbar">
-            <BrandLink />
+            <span className="brand">卡密系统</span>
             <nav className="nav">
               {isAdminLoggedIn ? <Link href="/admin">后台管理</Link> : null}
               <Link href="/redeem">核销页面</Link>
