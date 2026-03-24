@@ -308,6 +308,198 @@ label {
   color: var(--muted);
 }
 
+.redeem-page-wrap {
+  max-width: 760px;
+  margin: 0 auto;
+}
+
+.redeem-page-panel {
+  border-radius: 24px;
+  padding: 28px;
+}
+
+.redeem-page-head {
+  margin-bottom: 18px;
+  padding-bottom: 14px;
+  border-bottom: 1px solid var(--border);
+}
+
+.redeem-page-head h1 {
+  margin: 0;
+  font-size: 30px;
+}
+
+.redeem-form-adapted .textarea {
+  min-height: 120px;
+}
+
+.redeem-layout {
+  display: grid;
+  gap: 18px;
+  max-width: 860px;
+  margin: 0 auto;
+}
+
+.redeem-notice,
+.redeem-card,
+.redeem-help-card {
+  border: 1px solid rgba(129, 140, 248, 0.18);
+  border-radius: 18px;
+  box-shadow: 0 24px 60px rgba(7, 10, 30, 0.28);
+}
+
+.redeem-notice {
+  padding: 18px 22px;
+  background: linear-gradient(135deg, rgba(74, 54, 177, 0.95), rgba(88, 35, 164, 0.92));
+  color: #eef2ff;
+}
+
+.redeem-notice p {
+  margin: 0;
+  line-height: 1.8;
+  text-align: center;
+  font-size: 14px;
+}
+
+.redeem-card,
+.redeem-help-card {
+  background:
+    linear-gradient(180deg, rgba(23, 27, 52, 0.96), rgba(14, 18, 38, 0.98)),
+    #0f172a;
+  color: #f8fafc;
+}
+
+.redeem-card {
+  padding: 28px;
+}
+
+.redeem-card-header {
+  margin-bottom: 18px;
+}
+
+.redeem-card-header h1,
+.redeem-help-card h2 {
+  margin: 0;
+  font-size: 24px;
+  font-weight: 700;
+}
+
+.redeem-card-header p {
+  margin: 10px 0 0;
+  color: #94a3b8;
+  font-size: 14px;
+}
+
+.redeem-alert {
+  margin-bottom: 22px;
+  padding: 12px 14px;
+  border: 1px solid rgba(248, 113, 113, 0.2);
+  border-radius: 12px;
+  background: rgba(127, 29, 29, 0.22);
+  color: #fca5a5;
+  font-size: 13px;
+}
+
+.redeem-form {
+  display: grid;
+  gap: 18px;
+}
+
+.redeem-label {
+  display: grid;
+  gap: 10px;
+  color: #e2e8f0;
+  font-size: 14px;
+  font-weight: 600;
+}
+
+.redeem-input {
+  width: 100%;
+  padding: 14px 16px;
+  border: 1px solid rgba(148, 163, 184, 0.18);
+  border-radius: 12px;
+  outline: none;
+  background: rgba(15, 23, 42, 0.9);
+  color: #f8fafc;
+}
+
+.redeem-input::placeholder {
+  color: #64748b;
+}
+
+.redeem-input:focus {
+  border-color: #8b5cf6;
+  box-shadow: 0 0 0 3px rgba(139, 92, 246, 0.16);
+}
+
+.redeem-textarea {
+  min-height: 88px;
+  resize: vertical;
+}
+
+.redeem-submit {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 46px;
+  padding: 0 18px;
+  border: 0;
+  border-radius: 12px;
+  background: linear-gradient(90deg, #6366f1, #a855f7);
+  color: #fff;
+  font-weight: 700;
+  cursor: pointer;
+  box-shadow: 0 14px 30px rgba(124, 58, 237, 0.3);
+}
+
+.redeem-submit:disabled {
+  opacity: 0.7;
+  cursor: not-allowed;
+}
+
+.redeem-error {
+  margin: 16px 0 0;
+  color: #fca5a5;
+}
+
+.redeem-result {
+  margin-top: 18px;
+  padding: 16px;
+  border-radius: 14px;
+}
+
+.redeem-result strong {
+  display: block;
+  margin-bottom: 8px;
+}
+
+.redeem-result p {
+  margin: 0;
+  color: #cbd5e1;
+  line-height: 1.7;
+}
+
+.redeem-result-success {
+  background: rgba(22, 163, 74, 0.16);
+  border: 1px solid rgba(74, 222, 128, 0.2);
+}
+
+.redeem-result-warn {
+  background: rgba(234, 88, 12, 0.16);
+  border: 1px solid rgba(251, 146, 60, 0.2);
+}
+
+.redeem-help-card {
+  padding: 24px 28px;
+}
+
+.redeem-help-list {
+  margin: 14px 0 0;
+  padding-left: 20px;
+  color: #cbd5e1;
+  line-height: 1.9;
+}
+
 @media (max-width: 840px) {
   .topbar,
   .panel-header {
@@ -321,5 +513,14 @@ label {
 
   .main-content {
     padding: 16px;
+  }
+
+  .redeem-page-panel {
+    padding: 20px;
+  }
+
+  .redeem-card,
+  .redeem-help-card {
+    padding: 20px;
   }
 }

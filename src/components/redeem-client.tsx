@@ -42,8 +42,9 @@ function getReasonText(result: RedeemResult | null): string {
 }
 
 export default function RedeemClient() {
+  const [orderId, setOrderId] = useState("");
+  const [workosCursorSessionToken, setWorkosCursorSessionToken] = useState("");
   const [code, setCode] = useState("");
-  const [redeemer, setRedeemer] = useState("");
   const [submitting, setSubmitting] = useState(false);
   const [result, setResult] = useState<RedeemResult | null>(null);
   const [error, setError] = useState("");
@@ -62,7 +63,14 @@ export default function RedeemClient() {
         },
         body: JSON.stringify({
           code,
-          redeemer,
+          redeemer: [
+            orderId.trim() ? `订单号:${orderId.trim()}` : "",
+            workosCursorSessionToken.trim()
+              ? `WorkosCursorSessionToken:${workosCursorSessionToken.trim()}`
+              : "",
+          ]
+            .filter(Boolean)
+            .join(" | "),
         }),
       });
       const data = (await response.json()) as RedeemResult & { error?: string };
@@ -80,34 +88,41 @@ export default function RedeemClient() {
   }
 
   return (
-    <div className="panel narrow-panel">
-      <h1>卡密核销</h1>
-      <p className="muted">输入卡密后立即校验并完成核销，已核销卡密不可重复使用。</p>
+    <form className="stack-form redeem-form-adapted" onSubmit={handleSubmit}>
+      <label>
+        订单号
+        <input
+          className="input mono"
+          value={orderId}
+          onChange={(event) => setOrderId(event.target.value)}
+          placeholder="例如 ORDER-20260324-0001"
+        />
+      </label>
 
-      <form className="stack-form" onSubmit={handleSubmit}>
-        <label>
-          卡密
-          <input
-            className="input mono"
-            value={code}
-            onChange={(event) => setCode(event.target.value)}
-            placeholder="例如 VIP-ABCD-EFGH-IJKL"
-            required
-          />
-        </label>
-        <label>
-          核销人
-          <input
-            className="input"
-            value={redeemer}
-            onChange={(event) => setRedeemer(event.target.value)}
-            placeholder="可选，例如用户名或手机号"
-          />
-        </label>
-        <button className="button primary" type="submit" disabled={submitting}>
-          {submitting ? "核销中..." : "立即核销"}
-        </button>
-      </form>
+      <label>
+        WorkosCursorSessionToken
+        <textarea
+          className="textarea mono"
+          value={workosCursorSessionToken}
+          onChange={(event) => setWorkosCursorSessionToken(event.target.value)}
+          placeholder="请粘贴 WorkosCursorSessionToken..."
+        />
+      </label>
+
+      <label>
+        卡密
+        <input
+          className="input mono"
+          value={code}
+          onChange={(event) => setCode(event.target.value)}
+          placeholder="例如 VIP-ABCD-EFGH-IJKL"
+          required
+        />
+      </label>
+
+      <button className="button primary" type="submit" disabled={submitting}>
+        {submitting ? "核销中..." : "立即执行"}
+      </button>
 
       {error ? <p className="error-text">{error}</p> : null}
       {result ? (
@@ -122,6 +137,6 @@ export default function RedeemClient() {
           ) : null}
         </div>
       ) : null}
-    </div>
+    </form>
   );
 }
